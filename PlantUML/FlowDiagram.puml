@@ -1,0 +1,20 @@
+@startuml FlowDiagram
+start
+
+:Display website;
+:Select DB-type;
+:Fill info;
+
+if (Connect) then (yes)
+    #palegreen:Display datamodel;
+else (no)
+    #pink:Error;
+    kill
+endif
+
+:Select tables;
+:Mark anonymize;
+:Export;
+
+stop
+@enduml

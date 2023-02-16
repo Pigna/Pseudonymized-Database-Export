@@ -1,0 +1,23 @@
+@startuml FlowDiagram
+skinparam packageStyle rectangle
+skinparam nodesep 10
+left to right direction
+package Build {
+    rectangle "Compile" as compile
+    rectangle "Docker Build" as build
+}
+
+package Test {
+    rectangle "Unittests" as unit
+    rectangle "SonarCloud" as sonar
+}
+
+package Deploy {
+    rectangle "Release" as release
+    rectangle "Deploy" as deploy
+}
+
+GitPush --> Build
+Build --> Test
+Test --> Deploy
+@enduml

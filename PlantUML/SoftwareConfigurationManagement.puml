@@ -1,0 +1,10 @@
+@startuml Baseline_4
+left to right direction
+skinparam packageStyle rectangle
+skinparam nodesep 10
+
+rectangle "<b>Package Management\nNuGet"
+rectangle "<b>Version Control\nGithub"
+rectangle "<b>CI/CD\nBuild-in Github"   
+
+@enduml

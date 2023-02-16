@@ -1,0 +1,40 @@
+@startuml FlowDiagram
+skinparam ArrowHeadColor none
+skinparam packageStyle rectangle
+skinparam nodesep 10
+
+rectangle "<b>Eindproducten" as final
+rectangle "Documenten" as doc
+rectangle "Front-end website\nin React" as front
+rectangle "Back-end applicatie\nin .NET" as back
+rectangle "Bouwstraat" as cicd
+
+final --> front
+final --> back
+final --> cicd
+final --> doc
+
+package {
+    rectangle "Onderzoek" as research
+    rectangle "Analyse document" as analyse
+    rectangle "Software Architectuur Document" as sad
+    rectangle "Project Plan" as plan
+    
+    doc --> sad
+    doc --> research
+    doc --> analyse
+    doc --> plan
+}
+
+package {
+    rectangle "<I>Verslag" as report
+    rectangle "<I>Prototype \nGeneric db" as prototype
+    rectangle "<I>Prototype \ndatamodel\nklonen" as prototype2
+    rectangle "<I>Prototype \npseudonimiseren" as prototype3
+    
+    research --> report
+    research --> prototype
+    research --> prototype2
+    research --> prototype3
+}
+@enduml

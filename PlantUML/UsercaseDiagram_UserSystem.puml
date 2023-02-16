@@ -1,0 +1,23 @@
+@startuml UsecaseDiagram_UserSystem
+left to right direction
+
+:User: as user
+
+package system {
+    (DB Connect) as connect
+    (View DB-model) as view
+    (Select tables) as select
+    (Deselect tables) as deselect
+    (Mark to anonymize) as mark
+    (Export) as export
+    (Disconnect) as disconnect
+}
+
+user --> connect
+user --> view
+user --> select
+user --> deselect
+user --> mark
+user --> export
+user --> disconnect
+@enduml

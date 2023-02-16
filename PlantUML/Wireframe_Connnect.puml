@@ -1,0 +1,10 @@
+@startuml
+salt
+{^"Database connectie"
+  Locatie  | "url      "
+  Login    | "username "
+  Password | "****     "
+  Name     | "         "
+  [  OK   ]
+}
+@enduml
