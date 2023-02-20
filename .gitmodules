@@ -2,3 +2,6 @@
 	path = PDE_Frontend
 	url = https://github.com/Pigna/PDE_Frontend
 	branch = master
+[submodule "PDE_Backend"]
+	path = PDE_Backend
+	url = https://github.com/Pigna/PDE_Backend
