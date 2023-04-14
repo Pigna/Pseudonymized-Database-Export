@@ -1,0 +1,14 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title "C1 - System Context Diagram | Pseudonymized Database Export"
+
+Person(customer  , "Service desk", "A service desk employee")
+
+System(system_pde, "Pseudonymized Database Export", "Allows the user to view an external database schema and export an anonymized version.")
+
+ContainerDb_Ext(db, "Database", "Postgres/SQL database")
+
+Rel(customer, system_pde, "Views database Schema and export anonymized database")
+Rel(system_pde, db, "Queries")
+@enduml

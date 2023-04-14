@@ -1,0 +1,23 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title "C2 - Container Diagram | Pseudonymized Database Export"
+
+Person(customer  , "Service desk", "A service desk employee")
+System_Boundary(c1, "Pseudonymized Database Export") {
+    Container(frontend, "Web Application", "React Typescript", "Allows the user to view an external database schema and export an anonymized version.")
+    Container(backend_api, "Backend API", ".NET", "asd")
+    Container(backend_exporter, "Backend Exporter", ".NET", "asd")
+}
+ContainerDb_Ext(db, "Database", "Postgres/Sql database")
+
+Rel(customer, frontend, "Views database Schema and export anonymized database")
+
+Rel(frontend, backend_api, "Makes API calls to", "JSON/HTTPS")
+Rel(frontend, backend_exporter, "Makes API calls to", "JSON/HTTPS")
+
+Rel(backend_api, backend_exporter, "Export", "JSON/HTTPS")
+
+Rel(backend_api, db, "Queries", "SQL")
+Rel(backend_exporter, db, "Queries", "SQL")
+@enduml

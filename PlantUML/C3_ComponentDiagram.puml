@@ -1,0 +1,39 @@
+@startuml C4_Elements
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+title "C3 - Component Diagram | Pseudonymized Database Export"
+
+
+Container(frontend, "Web Application", "React Typescript", "Allows the user to view an external database schema and export an anonymized version.")
+
+ContainerQueue_Ext(mq, "Message Queue", "RabbitMQ")
+ContainerDb_Ext(db, "Database", "Postgres/Sql database")
+
+Container_Boundary(backend_api, "Backend API") {
+    Component(ba_api, "API", ".NET", "Allows users to get the database schema and export the database")
+    Component(ba_core, "Core", ".NET", "Handles business functionality")
+    Component(ba_data, "Data", ".NET", "Handles database connection to retrieve the schema information")
+    Component(ba_mq, "MQ", ".NET", "Handles the message queue connection to send a export request")
+    
+    Rel(frontend, ba_api, "Makes API calls to", "JSON/HTTPS")
+    
+    Rel(ba_api, ba_core, "Uses")
+    Rel(ba_core, ba_data, "Uses")
+    Rel(ba_core, ba_mq, "Uses")
+    
+    Rel(ba_data, db, "Queries schema", "SQL")
+    Rel(ba_mq, mq, "Send Message", "JSON")
+}
+
+Container_Boundary(backend_exporter, "Backend Exporter") {
+    Component(be_core, "Core", ".NET", "Combines database information and anonymized data and saves this to an export file.")
+    Component(be_mq, "MQ", ".NET", "Retrieves export requests with database information and info on what to anonymize.")
+    Component(be_data, "Data", ".NET", "Handles database connection to retrieve the data.")
+    
+    Rel(be_core, be_mq, "Uses")
+    Rel(be_core, be_data, "Uses")
+    
+    Rel(be_mq, mq, "Retrieve message", "JSON")
+    Rel(be_data, db, "Queries data", "SQL")
+}
+@enduml
